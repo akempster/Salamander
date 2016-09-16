@@ -42,6 +42,17 @@ typedef enum
 	LED_OFF_LOW
 }LED_drive;
 
+typedef struct
+{
+	GPIO_TypeDef* 	port;		// port to interface with (e.g. GPIOA)
+	uint16_t 		pins;		// pins to use (can be OR'd together) (e.g. GPIO_PIN_0)
+	uint8_t 		pull;		// GPIO_NOPULL | GPIO_PULLUP | GPIO_PULLDOWN
+} LED_Config;
+
 #endif
+
+/* Function prototype declarations */
+void LED_Init(LED_Config config);
+void LED_Set(LED_Config config, LED_drive state);
 
 #endif /* INC_LED_H_ */
