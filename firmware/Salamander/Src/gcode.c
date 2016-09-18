@@ -48,77 +48,77 @@ void GCODE_process(GCODE command)
 				break;
 			case GCODE_MOTORS_DISABLE:
 				break;
-			case 20:	// list files at the root folder of the SD card
+			case GCODE_FILESYSTEM_LIST_CUR_DIR:
 				break;
 			case GCODE_FILESYSTEM_MOUNT:
 				break;
 			case GCODE_FILESYSTEM_UNMOUNT:
 				break;
-			case 23:	// Select file for printing
+			case GCODE_FILESYSTEM_FILE_SELECT:
 				break;
-			case 24:	// start/resume SD card print
+			case GCODE_PRINT_START_RESUME:
 				break;
 			case GCODE_PRINT_PAUSE:
 				break;
-			case 26:	// Set SD position in bytes
+			case GCODE_FILE_SET_POSITION_BYTES:
 				break;
-			case 27:	// report SD print status
+			case GCODE_PRINT_REPORT_STATUS:
 				break;
-			case 28:	// write program to SD card
+			case GCODE_FILESYSTEM_WRITE_FILE:
 				break;
-			case 29:	// stop writing program to SD card
+			case GCODE_FILESYSTEM_STOP_WRITE_FILE:
 				break;
 			case GCODE_PRINT_EJECT:
 				break;
-			case 41:	// loop program (stop with reset button)
+			case GCODE_LOOP_PROGRAM:
 				break;
-			case 42:	// stop if out of material
+			case GCODE_STOP_IF_NO_MATERIAL:
 				break;
-			case 43:	// stop if out of material but leave heated bed on
+			case GCODE_STOP_IF_NO_MATERIAL_HEATBED_ON:
 				break;
-			case 80:	// turn on ATX power supply
+			case GCODE_POWER_SUPPLY_ON:
 				break;
-			case 81:	// turn off ATX power supply
+			case GCODE_POWER_SUPPLY_OFF:
 				break;
-			case 84:	// Stop idle hold (do not use whilst printing)
+			case GCODE_STOP_IDLE_HOLD:
 				break;
-			case 92:	// program set steps per unit
+			case GCODE_SET_STEPS_PER_UNIT:
 				break;
-			case 101:	// set extruder 1 to forward (outdated)
+			case GCODE_EXTRUDER_1_FORWARD:
 				break;
-			case 102:	// set extruder 1 to reverse (outdated)
+			case GCODE_EXTRUDER_1_REVERSE:
 				break;
-			case 103:	// turn all extruders off (outdated)
+			case GCODE_EXTRUDER_TURN_ALL_OFF:
 				break;
-			case 104:	// set extruder temperature (not waiting)
+			case GCODE_EXTRUDER_SET_TEMPERATURE:
 				break;
-			case 105:	// get extruder temperature
+			case GCODE_EXTRUDER_GET_TEMPERATURE:
 				break;
 			case GCODE_FAN_SET_SPEED:
 				break;
 			case GCODE_FAN_OFF:
 				break;
-			case 108:	// set extruder speed (outdated)
+			case GCODE_EXTRUDER_SET_SPEED:
 				break;
-			case 109:	// set extruder temperature (wait untill reached)
+			case GCODE_EXTRUDER_SET_TEMPERATURE_WAITING:
 				break;
-			case 110:	// set current line number
+			case GCDOE_SET_CURRENT_LINE_NUMBER:
 				break;
 			case GCODE_SET_DEBUG_LEVEL:
 				break;
 			case GCODE_STOP_EMERGENCY:
 				break;
-			case 113:	// set extruder pwm to x
+			case GCODE_EXTRUDER_SET_PWM:
 				break;
 			case GCODE_GET_CURRENT_POSITION:
 				break;
-			case 115:	// get firmware version and capabilities
+			case GCODE_GET_FIRMWARE_VERSION:
 				break;
-			case 116:	// wait for all temperatures
+			case GCODE_WAIT_FOR_ALL_TEMPERATURES:
 				break;
-			case 117:	// get zero position in steps
+			case GCODE_GET_ZERO_POSITION_IN_STEPS:
 				break;
-			case 119:	// get endstop status
+			case GCODE_GET_STATUS_ENDSTOPS:
 				break;
 			case GCODE_EXTRUDER_VALVE_OPEN:
 				break;
@@ -126,39 +126,35 @@ void GCODE_process(GCODE command)
 				break;
 			case GCODE_EXTRUDER_PRESSURE_SET:
 				break;
-			case GCODE_EXTRUDE_PRESSURE_OFF:
+			case GCODE_EXTRUDER_PRESSURE_OFF:
 				break;
 			case GCODE_HEATED_BED_SET_TEMPERATURE:
 				break;
 			case GCODE_HEATED_CHAMBER_SET_TEMPERATURE:
 				break;
-			case 142:	// Set holding pressure
+			case GCODE_SET_HOLDING_PRESSURE:
 				break;
-			case 143:	// set maximum hot-end temperature
+			case GCODE_SET_HOTEND_MAX_TEMPERATURE:
 				break;
-			case 160:	// set number of materials an extruder can handle
+			case GCODE_SET_EXTRUDER_MATERIALS_COUNT:
 				break;
-			case 203:	// set z offset
+			case GCODE_SET_OFFSET_Z:
 				break;
-			case 226:	// pauses printing
+			case GCODE_AUTO_REVERSE_AND_PRIME_DISABLE:
 				break;
-			case 227:	// enable automatic reverse and prime
+			case GCODE_AUTO_REVERSE_AND_PRIME_ENABLE:
 				break;
-			case 228:	// disable automatic reverse and prime
+			case GCODE_WAIT_FOR_TEMPERATURE_SET:
 				break;
-			case 229:	// enable automatic reverse and prime
+			case GCODE_CONVERYOR_BELT_START:
 				break;
-			case 230:	// enable / disable wait for temp
+			case GCODE_CONVEYOR_BELT_STOP:
 				break;
-			case 240:	// start conveyor belt motor
+			case GCODE_COOLER_FAN_START:
 				break;
-			case 241:	// stop conveyor belt motor
+			case GCODE_COOLER_FAN_STOP:
 				break;
-			case 245:	// start cooler fan
-				break;
-			case 246:	// stop cooler fan
-				break;
-			case 300:	// beep with s hz for p milliseconds
+			case GCODE_GENERATE_BEEP:	// beep with s hz for p milliseconds
 
 			default:
 				/// \todo missing code
