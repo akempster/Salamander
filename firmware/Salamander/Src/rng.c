@@ -46,14 +46,17 @@ void MX_RNG_Init(void)
 {
 
   hrng.Instance = RNG;
-  HAL_RNG_Init(&hrng);
+  if (HAL_RNG_Init(&hrng) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
 }
 
-void HAL_RNG_MspInit(RNG_HandleTypeDef* hrng)
+void HAL_RNG_MspInit(RNG_HandleTypeDef* rngHandle)
 {
 
-  if(hrng->Instance==RNG)
+  if(rngHandle->Instance==RNG)
   {
   /* USER CODE BEGIN RNG_MspInit 0 */
 
@@ -66,10 +69,10 @@ void HAL_RNG_MspInit(RNG_HandleTypeDef* hrng)
   }
 }
 
-void HAL_RNG_MspDeInit(RNG_HandleTypeDef* hrng)
+void HAL_RNG_MspDeInit(RNG_HandleTypeDef* rngHandle)
 {
 
-  if(hrng->Instance==RNG)
+  if(rngHandle->Instance==RNG)
   {
   /* USER CODE BEGIN RNG_MspDeInit 0 */
 
