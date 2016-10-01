@@ -65,7 +65,7 @@
 /*---------- -----------*/
 #define USBD_SUPPORT_USER_STRING     0
 /*---------- -----------*/
-#define USBD_DEBUG_LEVEL     0
+#define USBD_DEBUG_LEVEL     3
 /*---------- -----------*/
 #define USBD_LPM_ENABLED     0
 /*---------- -----------*/
@@ -159,7 +159,7 @@
 }
 #endif
 
-#endif //__USBD_CONF__H__
+#endif /* __USBD_CONF__H__ */
 
 /**
   * @}

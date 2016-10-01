@@ -52,6 +52,8 @@ extern HAL_SD_CardInfoTypedef SDCardInfo;
 
 /* USER CODE END Private defines */
 
+extern void Error_Handler(void);
+
 void MX_SDIO_SD_Init(void);
 
 /* USER CODE BEGIN Prototypes */

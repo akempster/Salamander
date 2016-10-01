@@ -59,11 +59,11 @@ void MX_SDIO_SD_Init(void)
 
 }
 
-void HAL_SD_MspInit(SD_HandleTypeDef* hsd)
+void HAL_SD_MspInit(SD_HandleTypeDef* sdHandle)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct;
-  if(hsd->Instance==SDIO)
+  if(sdHandle->Instance==SDIO)
   {
   /* USER CODE BEGIN SDIO_MspInit 0 */
 
@@ -100,10 +100,10 @@ void HAL_SD_MspInit(SD_HandleTypeDef* hsd)
   }
 }
 
-void HAL_SD_MspDeInit(SD_HandleTypeDef* hsd)
+void HAL_SD_MspDeInit(SD_HandleTypeDef* sdHandle)
 {
 
-  if(hsd->Instance==SDIO)
+  if(sdHandle->Instance==SDIO)
   {
   /* USER CODE BEGIN SDIO_MspDeInit 0 */
 
