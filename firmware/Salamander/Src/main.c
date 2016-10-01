@@ -38,7 +38,7 @@
 #include "lwip.h"
 #include "rng.h"
 #include "sdio.h"
-#include "usb_otg.h"
+#include "usb_device.h"
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
@@ -49,7 +49,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-
+extern USBD_HandleTypeDef hUsbDeviceFS;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,6 +61,12 @@ void SystemClock_Config(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
+UART_HandleTypeDef UartHandle;
+
+void USB_CDC_Init(void)
+{
+
+}
 
 /* USER CODE END 0 */
 
@@ -85,11 +91,12 @@ int main(void)
   MX_IWDG_Init();
   MX_RNG_Init();
   MX_SDIO_SD_Init();
-  MX_USB_OTG_FS_USB_Init();
   MX_FATFS_Init();
   MX_LWIP_Init();
+  MX_USB_DEVICE_Init();
 
   /* USER CODE BEGIN 2 */
+  USB_CDC_Init();
 
   /* USER CODE END 2 */
 
