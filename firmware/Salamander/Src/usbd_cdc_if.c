@@ -31,7 +31,11 @@
 */
 
 /* Includes ------------------------------------------------------------------*/
+#include <stdbool.h>
 #include "usbd_cdc_if.h"
+
+#include "usbComms.h"
+
 /* USER CODE BEGIN INCLUDE */
 /* USER CODE END INCLUDE */
 
@@ -59,8 +63,8 @@
 /* USER CODE BEGIN PRIVATE_DEFINES */
 /* Define size for the receive and transmit buffer over CDC */
 /* It's up to user to redefine and/or remove those define */
-#define APP_RX_DATA_SIZE  4
-#define APP_TX_DATA_SIZE  4
+#define APP_RX_DATA_SIZE  32
+#define APP_TX_DATA_SIZE  32
 /* USER CODE END PRIVATE_DEFINES */
 /**
   * @}
@@ -83,6 +87,11 @@
 /* It's up to user to redefine and/or remove those define */
 /* Received Data over USB are stored in this buffer       */
 uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
+bool rxBuffFull = false;
+
+
+
+circularBuffer receiveBuffer;
 
 /* Send Data over USB CDC are stored in this buffer       */
 uint8_t UserTxBufferFS[APP_TX_DATA_SIZE];
@@ -141,7 +150,19 @@ static int8_t CDC_Init_FS(void)
   /* Set Application Buffers */
   USBD_CDC_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, 0);
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, UserRxBufferFS);
+
+  receiveBuffer.readIdx = 0;
+  receiveBuffer.writeIdx = 0;
+
+  for (uint8_t i = 0; i < APP_RX_DATA_SIZE; i++)
+  {
+	  receiveBuffer.data[i] = 0;
+  }
+
+  USB_COMMS_Init();
+
   return (USBD_OK);
+
   /* USER CODE END 3 */ 
 }
 
@@ -250,9 +271,48 @@ static int8_t CDC_Control_FS  (uint8_t cmd, uint8_t* pbuf, uint16_t length)
 static int8_t CDC_Receive_FS (uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
+	int8_t errCode = USBD_OK;
+
+	// set the receive buffer to the UserRxBufferFS variable
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
-  USBD_CDC_ReceivePacket(&hUsbDeviceFS);
-  return (USBD_OK);
+  USBD_CDC_ReceivePacket(&hUsbDeviceFS);		// and get the data
+
+  rxBuffFull = true;
+
+  /* Time to build up our data */
+  if (true == USB_COMMS_AddToRxBuffer(Buf[0]))
+  {
+	errCode = USBD_FAIL;
+  }
+
+  receiveBuffer.data[receiveBuffer.writeIdx] = Buf[0];	// store data
+
+  receiveBuffer.writeIdx++;	// move pointer to next space
+
+  // check for end of buffer, wrap around if so
+  if (receiveBuffer.writeIdx > APP_RX_DATA_SIZE)
+  {
+	  receiveBuffer.writeIdx = 0;
+  }
+
+  // check for write overtaking read data, if so overwrite last location
+  if (receiveBuffer.writeIdx == receiveBuffer.readIdx)
+  {
+	  receiveBuffer.writeIdx--;
+  }
+
+//  uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
+//  uint8_t *readPtr = UserRxBufferFS;
+//  uint8_t *writePtr = UserRxBufferFS;
+
+//  typedef struct
+//  {
+//  		uint8_t data[APP_RX_DATA_SIZE];
+//  		uint8_t *readPtr;
+//  		uint8_t *writePtr;
+//  } circularBuffer;
+
+  return errCode;
   /* USER CODE END 6 */ 
 }
 

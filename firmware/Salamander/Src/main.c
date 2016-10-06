@@ -45,6 +45,7 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
+#include <stdbool.h>
 #include "usbd_cdc_if.h"
 /* USER CODE END Includes */
 
@@ -53,6 +54,10 @@
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 extern USBD_HandleTypeDef hUsbDeviceFS;
+
+extern uint8_t UserRxBufferFS[];
+extern bool rxBuffFull;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -65,9 +70,18 @@ void Error_Handler(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-//UART_HandleTypeDef UartHandle;
 
 void USB_CDC_Init(void)
+{
+
+}
+
+/*!
+ * Get a character from the USB virtual COM port
+ *
+ * \retval	any		character retrieved
+ */
+char VCP_GetChar(void)
 {
 
 }
@@ -78,7 +92,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-const uint8_t testMessage[] = "Hello world!\r\n";
+
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -112,7 +126,14 @@ const uint8_t testMessage[] = "Hello world!\r\n";
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  CDC_Transmit_FS(testMessage, sizeof(testMessage));
+	  /* if there is data available to read */
+	  if (rxBuffFull == true)
+	  {
+		  // write the data back out and reset the received data flag
+		  CDC_Transmit_FS(UserRxBufferFS, 1);
+		  rxBuffFull = false;
+	  }
+
 	  HAL_Delay(200);
   /* USER CODE END WHILE */
 
