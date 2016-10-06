@@ -77,3 +77,32 @@ bool USB_COMMS_AddToRxBuffer(uint8_t c)
 
 	return (retval);
 }
+
+/*
+ * Reads a character from the receive buffer, equivalent to getchar.
+ *
+ * This function is non-blocking.
+ *
+ * \retval 	the character from the receive buffer, if no data is available then
+ * 			the '\0' character shall be returned.
+ */
+uint8_t USB_COMMS_ReadByte(void)
+{
+	uint8_t byte = '\0';
+
+	// if data to read
+	if (receivedData.readIdx != receivedData.writeIdx)
+	{
+		byte = receivedData.data[receivedData.readIdx];		// get the data
+
+		receivedData.readIdx++;		// move to next byte in buffer
+
+		// check for wrap around
+		if (receivedData.readIdx == USB_COMMS_RX_BUF_LEN)
+		{
+			receivedData.readIdx = 0;
+		}
+	}
+
+	return byte;
+}

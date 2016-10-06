@@ -47,6 +47,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
 #include "usbd_cdc_if.h"
+#include "usbComms.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -72,16 +73,6 @@ void Error_Handler(void);
 /* USER CODE BEGIN 0 */
 
 void USB_CDC_Init(void)
-{
-
-}
-
-/*!
- * Get a character from the USB virtual COM port
- *
- * \retval	any		character retrieved
- */
-char VCP_GetChar(void)
 {
 
 }
@@ -126,15 +117,21 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  /* if there is data available to read */
-	  if (rxBuffFull == true)
+
+	  /*
+	   * This small code loop checks for data on the USB receive side, if
+	   * data is available it will then write the data back out. This is a
+	   * non-blocking operation!
+	   */
+	  uint8_t byte;
+
+	  byte = USB_COMMS_ReadByte();	// attempt a read
+
+	  if (byte != '\0')	// valid byte received
 	  {
-		  // write the data back out and reset the received data flag
-		  CDC_Transmit_FS(UserRxBufferFS, 1);
-		  rxBuffFull = false;
+		  CDC_Transmit_FS(&byte, 1);
 	  }
 
-	  HAL_Delay(200);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */

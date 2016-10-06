@@ -30,4 +30,7 @@ void USB_COMMS_Init (void);
 // add a character to the receive buffer
 bool USB_COMMS_AddToRxBuffer(uint8_t c);
 
+// reads a byte from the receive buffer, returns '\0' if no data to read
+uint8_t USB_COMMS_ReadByte(void);
+
 #endif /* USBCOMMS_H_ */
