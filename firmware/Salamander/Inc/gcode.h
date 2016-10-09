@@ -86,8 +86,11 @@ enum
 
 typedef struct
 {
-	char 	type;		// 'G' or 'M' code
-	uint8_t	number;		// command number
+	char 	type;			// 'G' or 'M' code
+	uint8_t	number;			// command number
+
+	uint8_t *optionalData;	// potential command
+	uint8_t optionalLen		// length of the potential command
 }GCODE;
 
 

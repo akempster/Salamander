@@ -47,6 +47,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
 #include "usbd_cdc_if.h"
+#include "parsing.h"
 #include "usbComms.h"
 /* USER CODE END Includes */
 
@@ -54,11 +55,6 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-extern USBD_HandleTypeDef hUsbDeviceFS;
-
-extern uint8_t UserRxBufferFS[];
-extern bool rxBuffFull;
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -71,11 +67,6 @@ void Error_Handler(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
-void USB_CDC_Init(void)
-{
-
-}
 
 /* USER CODE END 0 */
 
@@ -109,7 +100,6 @@ int main(void)
   MX_ETH_Init();
 
   /* USER CODE BEGIN 2 */
-  USB_CDC_Init();
 
   /* USER CODE END 2 */
 
@@ -117,20 +107,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-	  /*
-	   * This small code loop checks for data on the USB receive side, if
-	   * data is available it will then write the data back out. This is a
-	   * non-blocking operation!
-	   */
-	  uint8_t byte;
-
-	  byte = USB_COMMS_ReadByte();	// attempt a read
-
-	  if (byte != '\0')	// valid byte received
-	  {
-		  CDC_Transmit_FS(&byte, 1);
-	  }
+	  PARSING_HandleUsbComms();
 
   /* USER CODE END WHILE */
 

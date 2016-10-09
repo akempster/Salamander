@@ -12,6 +12,7 @@
 
 /* Standard include files */
 #include <stdint.h>
+#include <stdbool.h>
 
 /* Macros and definitions */
 #define USB_COMMS_RX_BUF_LEN	(64u)
@@ -32,5 +33,8 @@ bool USB_COMMS_AddToRxBuffer(uint8_t c);
 
 // reads a byte from the receive buffer, returns '\0' if no data to read
 uint8_t USB_COMMS_ReadByte(void);
+
+// read a '\r' or '\n' terminated string from the receive buffer
+int16_t USB_COMMS_ReadLine(uint8_t *str, uint8_t len);
 
 #endif /* USBCOMMS_H_ */

@@ -8,6 +8,7 @@
  */
 
 /* Standard include files */
+#include <stdio.h>
 #include <stdbool.h>
 
 /* Project include files */
