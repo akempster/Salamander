@@ -9,6 +9,7 @@
 #define INC_GCODE_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 enum
 {
@@ -87,12 +88,18 @@ enum
 typedef struct
 {
 	char 	type;			// 'G' or 'M' code
-	uint8_t	number;			// command number
+	uint16_t	number;			// command number
 
 	uint8_t *optionalData;	// potential command
-	uint8_t optionalLen		// length of the potential command
+	uint8_t optionalLen;	// length of the potential command
 }GCODE;
 
+/* This is a definition for a gcode function pointer. This is used to create
+ * an array which we can use to look up a function to handle a specific gcode
+ * command
+ */
+typedef bool (*gcode_function_type)(GCODE *data);
 
+extern gcode_function_type mCommands[];
 
 #endif /* INC_GCODE_H_ */
