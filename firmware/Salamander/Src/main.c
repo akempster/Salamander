@@ -67,7 +67,7 @@ void Error_Handler(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-bool motorsEnabled = true;
+
 /* USER CODE END 0 */
 
 int main(void)
