@@ -103,6 +103,8 @@ int main(void)
   MX_USART2_UART_Init();
   MX_ETH_Init();
 
+  for (uint32_t i = 0; i < 20000; i++);
+
   /* USER CODE BEGIN 2 */
 #ifdef ENABLE_UNIT_TESTS
   TestMain();

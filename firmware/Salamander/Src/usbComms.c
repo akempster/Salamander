@@ -34,6 +34,14 @@ void USB_COMMS_Init (void)
 }
 
 /*!
+ * USB version of putchar
+ */
+void USB_COMMS_putchar(const uint8_t data)
+{
+	CDC_Transmit_FS(&data, 1);
+}
+
+/*!
  * Adds a character to the receive buffer (i.e. data from the USB host)
  *
  * \param c		the character to add to the buffer

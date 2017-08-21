@@ -24,7 +24,7 @@
 							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.1234962778" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.1513368975" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.1109684815" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
-							<builder buildPath="${workspace_loc:/Salamander}/Debug" id="fr.ac6.managedbuild.builder.gnu.cross.912149730" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="fr.ac6.managedbuild.builder.gnu.cross">
+							<builder buildPath="${workspace_loc:/Salamander}/Debug" id="fr.ac6.managedbuild.builder.gnu.cross.912149730" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross">
 								<outputEntries>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Debug"/>
 								</outputEntries>
@@ -54,6 +54,7 @@
 								</option>
 								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.1766457089" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="-fmessage-length=0" valueType="string"/>
 								<option id="gnu.c.compiler.option.include.files.1740671692" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<option id="gnu.c.compiler.option.dialect.std.1817558686" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.175144428" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1962123160" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
 							</tool>
@@ -93,30 +94,7 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.138871191.108736649" name="/" resourcePath="testing/unity">
-						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug.1694893890" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug" unusedChildren="">
-							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.225107144.164229467" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix.225107144"/>
-							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.52170818.1743711668" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu.52170818"/>
-							<option id="fr.ac6.managedbuild.option.gnu.cross.board.126514251.1175900174" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board.126514251"/>
-							<option id="fr.ac6.managedbuild.option.gnu.cross.instructionSet.1989443008.1192404855" name="Instruction Set" superClass="fr.ac6.managedbuild.option.gnu.cross.instructionSet.1989443008"/>
-							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.1234962778.1001483458" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu.1234962778"/>
-							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.1513368975.1239069871" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi.1513368975"/>
-							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.318744768" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1182273541">
-								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1456445921" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
-								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1374034793" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
-							</tool>
-							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.159736332" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.1972469380"/>
-							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.1518496116" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.921172942"/>
-							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.556183558" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.1088297351"/>
-							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.1356329027" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver.615734649"/>
-							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.1317098926" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.419063690">
-								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1317608583" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.2049941284" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
-							</tool>
-						</toolChain>
-					</folderInfo>
 					<sourceEntries>
-						<entry excluding="testing" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Debug/Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
@@ -152,4 +130,5 @@
 			<content-type-mapping configuration="" content-type="org.eclipse.cdt.core.cSource" language="org.eclipse.cdt.core.gcc"/>
 		</project-mappings>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

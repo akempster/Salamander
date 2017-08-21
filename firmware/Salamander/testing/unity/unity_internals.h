@@ -243,7 +243,8 @@ typedef UNITY_FLOAT_TYPE UNITY_FLOAT;
 #ifndef UNITY_OUTPUT_CHAR
 /* Default to using putchar, which is defined in stdio.h */
 #include <stdio.h>
-#define UNITY_OUTPUT_CHAR(a) (void)putchar(a)
+void USB_COMMS_putchar(const uint8_t data);
+#define UNITY_OUTPUT_CHAR(a) (void)USB_COMMS_putchar(a)
 #else
   /* If defined as something else, make sure we declare it here so it's ready for use */
   #ifdef UNITY_OUTPUT_CHAR_HEADER_DECLARATION
