@@ -46,9 +46,13 @@
 
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
+
 #include "usbd_cdc_if.h"
 #include "parsing.h"
 #include "usbComms.h"
+
+#include "testMain.h"
+
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -67,7 +71,7 @@ void Error_Handler(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
+#define ENABLE_UNIT_TESTS
 /* USER CODE END 0 */
 
 int main(void)
@@ -100,7 +104,9 @@ int main(void)
   MX_ETH_Init();
 
   /* USER CODE BEGIN 2 */
-
+#ifdef ENABLE_UNIT_TESTS
+  TestMain();
+#endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
