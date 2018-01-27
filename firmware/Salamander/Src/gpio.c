@@ -42,6 +42,28 @@
 /* Configure GPIO                                                             */
 /*----------------------------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
+typedef struct
+{
+	GPIO_TypeDef *port;
+	uint32_t Pin;
+	uint32_t Mode;
+	uint32_t Pull;
+	uint32_t Speed;
+	uint32_t Alternate;
+
+} GPIO_CONFIG;
+
+GPIO_CONFIG gpioTable[] =
+{
+	// PORT	PIN				MODE				PULL			SPEED					Alternate
+	{GPIOC, GPIO_PIN_13, 	GPIO_MODE_INPUT, 	GPIO_NOPULL, 	GPIO_SPEED_FREQ_LOW, 	0},			// user blue button (dev board)
+};
+
+///*Configure GPIO pin : PtPin */
+//GPIO_InitStruct.Pin = User_Blue_Button_Pin;
+//GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+//GPIO_InitStruct.Pull = GPIO_NOPULL;
+//HAL_GPIO_Init(User_Blue_Button_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE END 1 */
 
@@ -58,7 +80,6 @@
 */
 void MX_GPIO_Init(void)
 {
-
   GPIO_InitTypeDef GPIO_InitStruct;
 
   /* GPIO Ports Clock Enable */
@@ -70,6 +91,23 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*
+   * Configure all pins as listed in the gpioTable
+   */
+  const uint8_t tableSize = sizeof(gpioTable)/sizeof(gpioTable[0]);
+  for (uint8_t i = 0; i < tableSize; i++)
+  {
+	  // setup structure based on table contents
+  	  GPIO_InitStruct.Pin 		= gpioTable[i].Pin;
+  	  GPIO_InitStruct.Mode 		= gpioTable[i].Mode;
+  	  GPIO_InitStruct.Pull		= gpioTable[i].Pull;
+  	  GPIO_InitStruct.Speed		= gpioTable[i].Speed;
+  	  GPIO_InitStruct.Alternate	= gpioTable[i].Alternate;
+
+  	  // This line configures the pin to the settings in gpioTable
+  	  HAL_GPIO_Init(gpioTable[i].port, &GPIO_InitStruct);
+  }
 
   /*Configure GPIO pins : PE2 PE3 PE4 PE5 
                            PE6 PE7 PE8 PE9 
@@ -83,11 +121,11 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = User_Blue_Button_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(User_Blue_Button_GPIO_Port, &GPIO_InitStruct);
+//  /*Configure GPIO pin : PtPin */
+//  GPIO_InitStruct.Pin = User_Blue_Button_Pin;
+//  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+//  GPIO_InitStruct.Pull = GPIO_NOPULL;
+//  HAL_GPIO_Init(User_Blue_Button_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PF0 PF1 PF2 PF3 
                            PF4 PF5 PF8 PF9 
