@@ -48,6 +48,7 @@
 #include <stdbool.h>
 
 #include "usbd_cdc_if.h"
+#include "motor.h"
 #include "parsing.h"
 #include "usbComms.h"
 
@@ -59,6 +60,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+DRV8825 motor0 = {{GPIOC, GPIO_PIN_3}, {GPIOC, GPIO_PIN_0}};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -107,7 +109,7 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
 #ifdef ENABLE_UNIT_TESTS
-  TestMain();
+//  TestMain();
 #endif
   /* USER CODE END 2 */
 
@@ -120,8 +122,21 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_0);
-	  HAL_Delay(10);
+	  DRV8825_SetDirection(&motor0, CLOCKWISE);
+
+	  for (uint8_t i = 0; i < 200; i++)
+	  {
+		  DRV8825_Step(&motor0);
+		  HAL_Delay(10);
+	  }
+
+	  DRV8825_SetDirection(&motor0, ANTICLOCKWISE);
+
+	  for (uint8_t i = 0; i < 200; i++)
+	  {
+	      DRV8825_Step(&motor0);
+	      HAL_Delay(10);
+	  }
   }
   /* USER CODE END 3 */
 

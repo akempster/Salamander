@@ -21,8 +21,8 @@ typedef enum
 
 typedef struct
 {
+	GPIO_TypeDef *port;
 	uint32_t Pin;
-	GPIO_TypeDef port;
 } GPIO_PIN;
 
 typedef struct
@@ -30,5 +30,8 @@ typedef struct
 		GPIO_PIN direction;
 		GPIO_PIN step;
 }DRV8825;
+
+void DRV8825_Step(DRV8825 *motor);
+void DRV8825_SetDirection(DRV8825 *motor, STEPPER_DIRECTION dir);
 
 #endif /* MOTOR_H_ */
